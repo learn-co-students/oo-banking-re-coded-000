@@ -11,7 +11,7 @@ class Transfer
     self.sender.valid? && self.receiver.valid?
   end
   def execute_transaction
-    if !@transactions.key?(sender.name + "-to-" + receiver.name) then
+    if !self.transactions.key?(sender.name + "-to-" + receiver.name) then
       if self.sender.valid? && self.sender.balance >= self.amount then
       self.sender.balance -= self.amount
       self.receiver.balance += self.amount
@@ -24,7 +24,7 @@ class Transfer
   end
   end
   def reverse_transfer
-    if @transactions.key?(sender.name + "-to-" + receiver.name) then
+    if self.transactions.key?(sender.name + "-to-" + receiver.name) then
     self.sender.balance += self.amount
     self.receiver.balance -= self.amount
     self.status = "reversed"
