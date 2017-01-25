@@ -29,11 +29,11 @@ describe 'Transfer' do
       end
     end
 
-    describe '#valid?' do
+    describe '#both_valid?' do
       it "can check that both accounts are valid" do
         expect(avi.valid?).to eq (true)
         expect(amanda.valid?).to eq(true)
-        expect(transfer.valid?).to eq(true)
+        expect(transfer.both_valid?).to eq(true)
       end
 
       it "calls on the sender and reciever's #valid? methods" do
@@ -42,7 +42,7 @@ describe 'Transfer' do
         expect(amanda).to receive(:valid?).and_return(true)
         expect(avi).to receive(:valid?).and_return(true)
 
-        transfer.valid?
+        transfer.both_valid?
       end
     end
 
@@ -63,14 +63,16 @@ describe 'Transfer' do
         expect(amanda.balance).to eq(950)
         expect(avi.balance).to eq(1050)
       end
+    end
 
-      it "rejects a transfer if the sender doesn't have a valid account" do
+    describe '#reject_transfer' do
+      it "can reject a transfer if the sender doesn't have a valid account" do
         expect(bad_transfer.execute_transaction).to eq("Transaction rejected. Please check your account balance.")
         expect(bad_transfer.status).to eq("rejected")
       end
     end
 
-    describe '#reverse_transfer' do
+     describe '#reverse_transfer' do
       it "can reverse a transfer between two accounts" do
         transfer.execute_transaction
         expect(amanda.balance).to eq(950)
