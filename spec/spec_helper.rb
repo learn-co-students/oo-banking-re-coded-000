@@ -7,6 +7,6 @@ require_relative '../lib/transfer'
 # loaded once.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-RSpec.configure do |config|
+RSpec.configure do |config |
   config.order = 'default'
 end
